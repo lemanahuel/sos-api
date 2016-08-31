@@ -1,0 +1,21 @@
+{
+  "name": "ch-api",
+  "version": "3.0.0",
+  "description": "Coderhouse API",
+  "private": true,
+  "homepage": "https://api.coderhouse.com",
+  "author": "Coderhouse Team <it@coderhouse.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CoderHouse/ch-api"
+  },
+  "contributors": [{
+    "name": "Coderhouse TEAM",
+    "email": "it@coderhouse.com"
+  }],
+  "dependencies": {},
+  "devDependencies": {},
+  "ignore": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,6 @@
+node_modules/**
+app/bower_components/**
+app/lib/**
+app/scripts/translations.js
+dist/**
+.tmp/**
