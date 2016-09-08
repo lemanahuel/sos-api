@@ -12,61 +12,16 @@ module.exports = (app) => {
     next();
   });
 
-  let loadAdmin = () => {
-    require('./admin/schedules')(app);
-    require('./admin/camadas')(app);
-    require('./admin/classes')(app);
-    require('./admin/histories')(app);
-    require('./admin/modules')(app);
-    require('./admin/profiles')(app);
-    require('./admin/stages')(app);
-    require('./admin/students')(app);
-    require('./admin/teachers')(app);
-    require('./admin/tps')(app);
-    require('./admin/users')(app);
-    require('./admin/remotes')(app);
-    require('./admin/feedbacks')(app);
-    require('./admin/upload-image')(app);
-  };
-
   let loadPrivate = () => {
-    require('./private/auth')(app);
-    require('./private/careers')(app);
-    require('./private/courses')(app);
-    require('./private/currency')(app);
-    require('./private/levels')(app);
-    require('./private/workshops')(app);
-    require('./private/upload-image')(app);
-    require('./private/subscriptions')(app);
-    require('./private/companies')(app);
     require('./private/users')(app);
-    require('./private/countries')(app);
-    require('./private/coworkings')(app);
-    require('./private/jobs')(app);
-    require('./private/recruiters')(app);
-    require('./private/io-users')(app);
-    require('./private/reports')(app);
-    require('./private/camadas')(app);
+    require('./private/capactitationCenters')(app);
   };
 
   let loadPublic = () => {
-    require('./public/careers')(app);
-    require('./public/courses')(app);
-    require('./public/currency')(app);
-    require('./public/levels')(app);
-    require('./public/purchase')(app);
-    require('./public/subscriptions')(app);
-    require('./public/workshops')(app);
-    require('./public/companies')(app);
-    require('./public/countries')(app);
-    require('./public/wheeloffortune')(app);
-    require('./public/certifications')(app);
-    require('./public/jobs')(app);
-    require('./public/auth')(app);
-    require('./public/enrool')(app);
+    require('./public/users')(app);
+    require('./public/capactitationCenters')(app);
   };
 
-  loadAdmin();
   loadPrivate();
   loadPublic();
 
@@ -76,8 +31,8 @@ module.exports = (app) => {
       res.redirect(301, 'https://localhost:3040');
     } else if (host === 'ch-api-qa.herokuapp.com') {
       res.redirect(301, 'https://ch-www-qa.herokuapp.com');
-    } else if (host === 'ch-api.herokuapp.com' || host === 'api.coderhouse.com') {
-      res.redirect(301, 'https://www.coderhouse.com');
+    } else if (host === 'ch-api.herokuapp.com' || host === 'api.voluntariosos.com') {
+      res.redirect(301, 'https://www.voluntariosos.com');
     }
   });
 };

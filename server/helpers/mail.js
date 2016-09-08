@@ -6,10 +6,10 @@ const config = require('../config/auth'),
   _ = require('lodash');
 
 const mails = {
-  ar: 'hola@coderhouse.com',
-  cl: 'chile@coderhouse.com',
-  uy: 'uruguay@coderhouse.com',
-  talent: 'talento@coderhouse.com'
+  ar: 'hola@voluntariosos.com',
+  cl: 'chile@voluntariosos.com',
+  uy: 'uruguay@voluntariosos.com',
+  talent: 'talento@voluntariosos.com'
 };
 
 const SEDES = {
@@ -18,21 +18,21 @@ const SEDES = {
     email: mails.ar,
     phone: '+54 11 5252 9557',
     location: 'El Salvador 5220, piso 3, Oficina 308 Palermo, Buenos Aires, Argentina.',
-    seller: 'chris.s@coderhouse.com'
+    seller: 'chris.s@voluntariosos.com'
   },
   cl: {
     label: 'Chile',
     email: mails.cl,
     phone: '+56 45 294 3951',
     location: 'General del Canto 182 Providencia, Santiago.',
-    seller: 'stefany@coderhouse.com'
+    seller: 'stefany@voluntariosos.com'
   },
   uy: {
     label: 'Uruguay',
     email: mails.uy,
     phone: '+598-092134525',
     location: 'Tiburcio Gómez 1330. piso 3 CP: 11200 Montevideo, Uruguay',
-    seller: 'genesis@coderhouse.com'
+    seller: 'genesis@voluntariosos.com'
   }
 };
 

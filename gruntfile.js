@@ -83,11 +83,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build-qa', ['lint']);
-
   grunt.registerTask('build-prod', ['lint']);
-
   grunt.registerTask('default', ['concurrent']);
-
   grunt.registerTask('heroku:development', 'build-qa');
   grunt.registerTask('heroku:qa', 'build-qa');
   grunt.registerTask('heroku:production', process.env.ENV_QA ? 'build-qa' : 'build-prod');

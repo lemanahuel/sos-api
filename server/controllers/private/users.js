@@ -1,10 +1,10 @@
 'use strict';
 
 const helpers = require('../helpers'),
-  Model = require('../models/companies').model,
+  Model = require('../models/private/user').model,
   _ = require('lodash');
 
-module.exports = class Company {
+module.exports = class Users {
 
   static create(req, res, next) {
     Model.create(req.body, (err, doc) => {
@@ -16,30 +16,30 @@ module.exports = class Company {
     let q = req.query;
     let findParams = {};
     let options = {};
-    let displayable = {
-      $or: [{
-        display: {
-          $exists: false
-        }
-      }, {
-        display: true
-      }]
-    };
 
-    Model.find(_.merge(displayable, findParams), null, options)
+    if (q.limit) {
+      options.limit = parseInt(q.limit, 10);
+    }
+
+    if (q.rol) {
+      findParams.rol = q.rol;
+    }
+
+    Model.find(findParams, null, options)
       .lean().exec((err, docs) => {
         helpers.handleResponse(res, err, docs);
       });
   }
 
   static readById(req, res, next) {
-    Model.findById(req.params.companyId).lean().exec((err, doc) => {
+    Model.findById(req.params.userId).lean().exec((err, doc) => {
       helpers.handleResponse(res, err, doc);
     });
   }
 
   static update(req, res, next) {
-    Model.findByIdAndUpdate(req.params.companyId, req.body, {
+    delete req.body._id;
+    Model.findByIdAndUpdate(req.params.userId, req.body, {
       new: true
     }).lean().exec((err, doc) => {
       helpers.handleResponse(res, err, doc, next);
@@ -47,9 +47,9 @@ module.exports = class Company {
   }
 
   static delete(req, res, next) {
-    Model.findByIdAndUpdate(req.params.companyId, {
+    Model.findByIdAndUpdate(req.params.userId, {
       $set: {
-        display: false
+        enable: false
       }
     }, {
       new: true
@@ -57,5 +57,4 @@ module.exports = class Company {
       helpers.handleResponse(res, err, doc, next);
     });
   }
-
 };

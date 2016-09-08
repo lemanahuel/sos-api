@@ -5,13 +5,13 @@ const express = require('express'),
   https = require('https'),
   fs = require('fs'),
   compression = require('compression'),
-  //cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   helpers = require('./helpers'),
   session = require('express-session'),
   RedisStore = require('connect-redis')(session),
   app = express(),
   path = require('path'),
+  port = 3001,
   credentials = {
     key: fs.readFileSync(__dirname + '/cert/server.key', 'utf8'),
     cert: fs.readFileSync(__dirname + '/cert/server.crt', 'utf8')
@@ -32,7 +32,7 @@ app.use(helpers.forceHttps);
 app.set('trust proxy', 1); // trust first proxy
 app.use(session({
   store: new RedisStore(),
-  secret: 'coderhouse secret key',
+  secret: 'voluntariosos secret key',
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -46,12 +46,12 @@ require('./config/passport')(app);
 require('./routes/routes')(app);
 // If dev create https server, in production Heroku handles this
 if (process.env.NODE_ENV === 'development') {
-  https.createServer(credentials, app).listen(process.env.PORT || 3001);
+  https.createServer(credentials, app).listen(port);
 } else {
-  http.createServer(app).listen(process.env.PORT || 3001);
+  http.createServer(app).listen(port);
 }
 
-console.log('CH-API application started on port ' + (process.env.PORT || 3001));
+console.log('SOS-API application started on port ' + port);
 
 // Expose app
 module.exports = exports = app;

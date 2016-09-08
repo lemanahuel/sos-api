@@ -9,7 +9,7 @@ module.exports = (app) => {
     app.enable('trust proxy');
   }
   // Connect to Database
-  db.connect(process.env.MONGOLAB_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/coderhouse');
+  db.connect(process.env.MONGOLAB_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/sos');
 
   app.use(require('body-parser').json());
   app.use(require('body-parser').urlencoded({

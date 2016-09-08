@@ -1,7 +1,7 @@
 'use strict';
 
 const helpers = require('../../helpers'),
-  Users = require('../../controllers/users');
+  Users = require('../../controllers/private/users');
 
 module.exports = (app) => {
 
