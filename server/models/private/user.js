@@ -65,9 +65,6 @@ module.exports.schema = schema = new mongoose.Schema({
   }],
   settings: {},
   notifications: {
-    unsubscribe: {
-      type: Boolean
-    },
     sleeptime: [{
       from: {
         type: Date
@@ -84,7 +81,6 @@ module.exports.schema = schema = new mongoose.Schema({
       default: false
     }
   }
-
 });
 
 module.exports.model = mongoose.model('Users', schema, 'users');
