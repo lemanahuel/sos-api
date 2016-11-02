@@ -1,8 +1,7 @@
 'use strict';
 
 const passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy,
-  User = require('../models/user').model;
+  LocalStrategy = require('passport-local').Strategy;
 
 module.exports = (app) => {
 

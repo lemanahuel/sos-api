@@ -1,7 +1,7 @@
 'use strict';
 
-const helpers = require('../helpers'),
-  Model = require('../models/private/user').model,
+const helpers = require('../../helpers'),
+  Model = require('../../models/private/user').model,
   _ = require('lodash');
 
 module.exports = class Users {

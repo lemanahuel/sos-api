@@ -14,12 +14,13 @@ module.exports = (app) => {
 
   let loadPrivate = () => {
     require('./private/users')(app);
-    require('./private/capactitationCenters')(app);
+    require('./private/capacitationCenters')(app);
   };
 
   let loadPublic = () => {
     require('./public/users')(app);
-    require('./public/capactitationCenters')(app);
+    require('./public/capacitationCenters')(app);
+    require('./public/messages')(app);
   };
 
   loadPrivate();
@@ -30,7 +31,7 @@ module.exports = (app) => {
     if (process.env.NODE_ENV === 'development' || host === 'localhost') {
       res.redirect(301, 'https://localhost:3040');
     } else if (host === 'ch-api-qa.herokuapp.com') {
-      res.redirect(301, 'https://ch-www-qa.herokuapp.com');
+      res.redirect(301, 'https://sos-www-qa.herokuapp.com');
     } else if (host === 'ch-api.herokuapp.com' || host === 'api.voluntariosos.com') {
       res.redirect(301, 'https://www.voluntariosos.com');
     }

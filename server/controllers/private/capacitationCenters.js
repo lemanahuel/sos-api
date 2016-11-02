@@ -1,7 +1,7 @@
 'use strict';
 
-const helpers = require('../helpers'),
-  Model = require('../models/private/capacitationCenter').model,
+const helpers = require('../../helpers'),
+  Model = require('../../models/private/capacitationCenter').model,
   _ = require('lodash');
 
 module.exports = class Users {
