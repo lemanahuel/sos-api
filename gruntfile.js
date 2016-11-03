@@ -2,7 +2,7 @@
 
 const defaultAssets = ['gruntfile.js', 'server/*.js', 'server/**/*.js'];
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   grunt.initConfig({
     nodemon: {
       dev: {
@@ -77,10 +77,7 @@ module.exports = function (grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('lint', [
-    'jshint',
-    'eslint'
-  ]);
+  grunt.registerTask('lint', []);
 
   grunt.registerTask('build-qa', ['lint']);
   grunt.registerTask('build-prod', ['lint']);
