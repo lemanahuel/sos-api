@@ -10,7 +10,7 @@
     "start": "grunt"
   },
   "dependencies": {
-   "async": "2.1.2",
+    "async": "2.1.2",
     "body-parser": "1.15.2",
     "bower": "1.7.9",
     "chalk": "^1.1.3",
@@ -71,7 +71,6 @@
     "sendgrid": "2.0.0",
     "stripe": "^4.12.0",
     "url": "0.11.0"
-  },
   },
   "devDependencies": {}
 }
