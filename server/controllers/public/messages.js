@@ -26,4 +26,10 @@ module.exports = class Users {
     });
   }
 
+  static read(req, res, next) {
+    helpers.handleResponse(res, null, {
+      msg: 'test'
+    });
+  }
+
 };
