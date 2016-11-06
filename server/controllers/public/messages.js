@@ -7,12 +7,13 @@ module.exports = class Users {
 
   static send(req, res, next) {
     console.log(req.body);
+
     fcm.send({
-      to: req.body.toekn,
+      to: req.body.token,
       //collapse_key: 'your_collapse_key',
-      data: {
-        your_custom_data_key: 'your_custom_data_value'
-      },
+      // data: {
+      //   your_custom_data_key: 'your_custom_data_value'
+      // },
       notification: {
         title: 'Nueva Emergencia',
         body: 'Hola ' + req.body.username
@@ -20,8 +21,7 @@ module.exports = class Users {
     }).then((err, res) => {
       console.log("Successfully sent with response: ", err, res);
     }).catch((err, res) => {
-      console.log("Something has gone wrong!");
-      console.error(err);
+      console.log("Something has gone wrong!", err);
     });
   }
 
