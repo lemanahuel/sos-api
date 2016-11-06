@@ -15,12 +15,14 @@ module.exports = class Messages {
     //   your_custom_data_key: 'your_custom_data_value'
     // },
 
+    users = _.groupBy(users, 'token');
+
     async.each(users, (user, cb) => {
       fcm.send({
         to: user.token,
         notification: {
-          title: 'Nueva Emergencia',
-          body: 'Hola ' + user.username
+          title: 'Notificacion enviada a ' + users.length,
+          body: 'Hola Voluntarioso!'
         }
       }).then((res) => {
         console.log("Successfully sent with response: ", res);
