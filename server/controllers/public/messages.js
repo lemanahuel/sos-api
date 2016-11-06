@@ -21,8 +21,8 @@ module.exports = class Messages {
       fcm.send({
         to: user.token,
         notification: {
-          title: 'Notificacion enviada a ' + users.length,
-          body: 'Hola Voluntarioso!'
+          title: 'User: ' + user.name,
+          body: 'Body: ' + user.txt + ' - Notificacion enviada a ' + users.length + ' VoluntarioSOS'
         }
       }).then((res) => {
         console.log("Successfully sent with response: ", res);
