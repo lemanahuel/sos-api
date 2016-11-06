@@ -6,7 +6,7 @@ const fcm = new FCM('AIzaSyBAeWOBBPENZNH4DoSR_HgjOjLd51LcWB0');
 module.exports = class Users {
 
   static send(req, res, next) {
-    console.log("Successfully sent with response: ", req.body);
+    console.log(req.body);
     fcm.send({
       to: req.body.toekn,
       //collapse_key: 'your_collapse_key',
@@ -17,9 +17,9 @@ module.exports = class Users {
         title: 'Nueva Emergencia',
         body: 'Hola ' + req.body.username
       }
-    }).then((res) => {
-      console.log("Successfully sent with response: ", res);
-    }).catch((err) => {
+    }).then((err, res) => {
+      console.log("Successfully sent with response: ", err, res);
+    }).catch((err, res) => {
       console.log("Something has gone wrong!");
       console.error(err);
     });
