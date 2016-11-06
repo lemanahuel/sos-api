@@ -15,7 +15,9 @@ module.exports = class Messages {
     //   your_custom_data_key: 'your_custom_data_value'
     // },
 
-    users = _.groupBy(users, 'token');
+    // users = _.groupBy(users, 'token');
+
+    console.log(users);
 
     async.each(users, (user, cb) => {
       fcm.send({
