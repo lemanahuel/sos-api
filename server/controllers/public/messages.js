@@ -1,7 +1,7 @@
 const helpers = require('../../helpers'),
   _ = require('lodash');
 const FCM = require('fcm-push');
-const fcm = new FCM('AIzaSyBAeWOBBPENZNH4DoSR_HgjOjLd51LcWB0');
+const fcm = new FCM('AIzaSyB6GGfmBH5AB9lkXnUD96cpci6JpwnKLb0');
 
 module.exports = class Users {
 
