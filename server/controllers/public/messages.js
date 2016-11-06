@@ -23,13 +23,13 @@ module.exports = class Messages {
       fcm.send({
         to: user.token,
         data: {
-          title: 'data-title: ' + user.name,
-          body: 'data-body: ' + user.txt,
+          title: user.txt,
+          body: user.name,
           user: user
         },
         notification: {
-          title: 'User: ' + user.name,
-          body: 'Body: ' + user.txt + ' - Notificacion enviada a ' + users.length + ' VoluntarioSOS'
+          title: user.txt + ' (' + users.length + ')',
+          body: user.name
         }
       }).then((res) => {
         console.log("Successfully sent with response: ", res);
