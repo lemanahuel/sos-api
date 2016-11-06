@@ -22,6 +22,11 @@ module.exports = class Messages {
     async.each(users, (user, cb) => {
       fcm.send({
         to: user.token,
+        data: {
+          title: 'data-title: ' + user.name,
+          body: 'data-body: ' + user.txt,
+          user: user
+        },
         notification: {
           title: 'User: ' + user.name,
           body: 'Body: ' + user.txt + ' - Notificacion enviada a ' + users.length + ' VoluntarioSOS'
