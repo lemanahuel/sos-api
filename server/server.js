@@ -11,7 +11,7 @@ const express = require('express'),
   RedisStore = require('connect-redis')(session),
   app = express(),
   path = require('path'),
-  port = process.env.PORT || 3002,
+  port = process.env.PORT || 3001,
   credentials = {
     key: fs.readFileSync(path.join(__dirname, '/cert/server.key'), 'utf8'),
     cert: fs.readFileSync(path.join(__dirname, '/cert/server.crt'), 'utf8')
