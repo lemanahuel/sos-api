@@ -35,6 +35,35 @@ module.exports = class CC {
         }],
         enable: false,
         published: false
+      }, {
+        user: {},
+        name: 'Centro de capacitacion 2',
+        description: 'Damos capacitaciones 2',
+        url: 'https://www.coderhouse.com',
+        avatar: 'avatar.jpg',
+        contact: {
+          email: 'center@gmail.com',
+          phone: 44810302
+        },
+        location: {
+          address: {},
+          hours: {
+            from: new Date(),
+            to: new Date()
+          },
+          days: {
+            from: 1,
+            to: 2
+          }
+        },
+        courses: [{
+          name: 'Curso de RPC 2',
+          description: 'Descripcion del curso 2',
+          url: 'https://www.coderhouse.com',
+          published: false
+        }],
+        enable: false,
+        published: false
       }];
       helpers.handleResponse(res, err, docs);
     });
