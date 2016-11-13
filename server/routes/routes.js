@@ -20,7 +20,7 @@ module.exports = (app) => {
   let loadPublic = () => {
     require('./public/users')(app);
     require('./public/capacitationCenters')(app);
-    require('./public/messages')(app);
+    require('./public/emergencies')(app);
   };
 
   loadPrivate();

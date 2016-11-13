@@ -5,7 +5,7 @@ const FCM = require('fcm-push');
 const fcm = new FCM('AIzaSyB6GGfmBH5AB9lkXnUD96cpci6JpwnKLb0');
 let users = [];
 
-module.exports = class Messages {
+module.exports = class Emergencies {
 
   static send(req, res, next) {
     users.push(req.body);
@@ -44,9 +44,11 @@ module.exports = class Messages {
   }
 
   static read(req, res, next) {
-    helpers.handleResponse(res, null, {
-      msg: 'test'
-    });
+    helpers.handleResponse(res, null, users);
+  }
+
+  static readById(req, res, next) {
+    helpers.handleResponse(res, null, users);
   }
 
 };
