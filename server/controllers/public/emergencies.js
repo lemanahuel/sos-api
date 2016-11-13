@@ -40,6 +40,7 @@ module.exports = class Emergencies {
       });
     }, (err) => {
       console.log('FINISH-USERS', users.length);
+      helpers.handleResponse(res, null, req.body);
     });
   }
 
