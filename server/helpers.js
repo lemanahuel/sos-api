@@ -104,15 +104,15 @@ module.exports.domains = () => {
   let domains = {};
   if (isProd) {
     domains.web = 'https://www.voluntariosos.com/';
-    domains.dash = 'http://dash.voluntariosos.com/';
+    domains.admin = 'https://admin.voluntariosos.com/';
     domains.api = 'https://api.voluntariosos.com/';
   } else if (isQA) {
     domains.web = 'http://sos-www-qa.herokuapp.com/';
-    domains.dash = 'http://sos-dash-qa.herokuapp.com/';
+    domains.admin = 'https://sos-admin-qa.herokuapp.com/';
     domains.api = 'http://sos-api-qa.herokuapp.com/';
   } else {
     domains.web = 'https://localhost:3040/';
-    domains.dash = 'http://localhost:3002/';
+    domains.admin = 'https://localhost:3002/';
     domains.api = 'https://localhost:3001/';
   }
 

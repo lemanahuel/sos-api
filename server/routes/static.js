@@ -21,9 +21,9 @@ module.exports = (app) => {
     app.use(express.static(helpers.root + '/.tmp'));
   }
 
-  if (env === 'qa' || env === 'production') {
-    app.use(express.static(helpers.root + '/dist'));
-  }
+  //if (env === 'qa' || env === 'qa' || env === 'production') {
+  app.use(express.static(helpers.root + '/public'));
+  //}
 
   // Fast 404 for assets not found
   app.get(/^\/(fonts|images|scripts|styles)\/.*/, (req, res) => {

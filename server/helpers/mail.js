@@ -53,7 +53,7 @@ module.exports = class Mail {
       let mail = {
         to: params.toEmail,
         from: params.fromEmail,
-        fromname: 'Coderhouse',
+        fromname: 'VoluntarioSOS',
         subject: params.subject,
         html: _.template(html)(params.tpl.params)
       };
