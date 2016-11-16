@@ -5,6 +5,10 @@ const path = require('path'),
   crypto = require('crypto'),
   iplocation = require('iplocation'),
   partialResponse = require('./middleware/partial-response');
+const _ = require('lodash');
+const fs = require('fs');
+const isProd = !process.env.ENV_QA && process.env.NODE_ENV === 'production';
+const isQA = process.env.ENV_QA && process.env.NODE_ENV === 'production';
 
 // Root directory for the server
 module.exports.rootServer = __dirname;
@@ -65,12 +69,30 @@ let createToken = (secret) => {
 
 module.exports.createToken = createToken;
 
+let domainWhiteList = (origin) => {
+  let origins = ['127.0.0.1', 'localhost', 'sos-', 'voluntariosos'];
+  let valid = false;
+
+  _.each(origins, (item) => {
+    if (origin && origin.indexOf(item) !== -1) {
+      valid = true;
+    }
+  });
+
+  if (!valid) {
+    console.log('no-valid-domain');
+  }
+  return valid;
+};
+
+module.exports.domainWhiteList = domainWhiteList;
+
 module.exports.checkAuth = (req, res, next) => {
-  let token = createToken('voluntariosos');
+  let token = createToken('coderhouse');
   let headerToken = req.headers.token;
   if (headerToken && headerToken === token) {
     next();
-  } else if (admin_helpers.domainWhiteList(req.headers.origin)) {
+  } else if (domainWhiteList(req.headers.origin)) {
     next();
   } else {
     res.send({
@@ -78,6 +100,7 @@ module.exports.checkAuth = (req, res, next) => {
     });
   }
 };
+
 
 module.exports.getRandomString = () => {
   var timestamp = new Date().getTime().toString();

@@ -13,8 +13,10 @@ module.exports = (app) => {
   });
 
   let loadPrivate = () => {
+    require('./private/auth')(app);
     require('./private/users')(app);
     require('./private/capacitationCenters')(app);
+    require('./private/users')(app);
   };
 
   let loadPublic = () => {
