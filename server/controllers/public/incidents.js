@@ -75,19 +75,23 @@ module.exports = class Incidents {
 
   static respond(req, res, next) {
     let response = req.body;
+    let params = {
+      $push: {
+        responses: response
+      }
+    };
 
     Model.findById(req.params.incidentId).lean().exec((err, doc) => {
       let amountOfAffirmatives = _.filter(doc.responses, {
         affirmative: true
       });
-      Model.findByIdAndUpdate(req.params.incidentId, {
-        $push: {
-          responses: response
-        }
-      }, {
+      if (amountOfAffirmatives.length >= 3) {
+        params.enable = false;
+      }
+      Model.findByIdAndUpdate(req.params.incidentId, params, {
         new: true
       }).lean().exec((err, doc) => {
-        if (amountOfAffirmatives.length >= 3) {
+        if (!doc.enable) {
           helpers.handleResponse(res, err, {
             msg: 'Ya respondieron afirmativamente varios voluntarios!'
           }, next);
