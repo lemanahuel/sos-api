@@ -13,6 +13,18 @@ module.exports.schema = schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  token: {
+    type: String,
+    trim: true
+  },
+  title: {
+    type: String,
+    trim: true
+  },
+  body: {
+    type: String,
+    trim: true
+  },
   responses: [{
     user: {
       type: mongoose.Schema.Types.ObjectId,
