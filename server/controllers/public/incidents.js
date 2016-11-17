@@ -7,7 +7,25 @@ const FCM = require('fcm-push');
 const fcm = new FCM('AIzaSyDi7v71mSCz5sVjXew3bYUrCbfhsadVcL4');
 const Model = require('../../models/private/incident').model;
 
-let sendNotification = () => {
+let respondIncidentByNotification = (incident) => {
+  fcm.send({
+    to: incident.token,
+    data: {
+      title: incident.title,
+      body: incident.body
+    },
+    notification: {
+      title: 'Voluntario confirmado',
+      body: 'En breve un voluntario se estara acercado a tu ubicacion'
+    }
+  }).then((res) => {
+    console.log("Successfully sent with response: ", res);
+  }).catch((err) => {
+    console.log("Something has gone wrong!", err);
+  });
+};
+
+let sendNotifications = () => {
   Model.find({
     enable: true
   }).lean().exec((err, docs) => {
@@ -53,6 +71,8 @@ module.exports = class Incidents {
       title: incident.title,
       body: incident.body
     }, (err, doc) => {
+      sendNotifications();
+
       helpers.handleResponse(res, err, {
         msg: 'incident-sent'
       }, next);
@@ -96,6 +116,7 @@ module.exports = class Incidents {
             msg: 'Ya respondieron afirmativamente varios voluntarios!'
           }, next);
         } else {
+          respondIncidentByNotification(doc);
           helpers.handleResponse(res, err, doc, next);
         }
       });
