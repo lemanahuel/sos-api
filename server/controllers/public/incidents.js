@@ -3,9 +3,10 @@ const helpers = require('../../helpers'),
   _ = require('lodash');
 const FCM = require('fcm-push');
 const fcm = new FCM('AIzaSyDi7v71mSCz5sVjXew3bYUrCbfhsadVcL4');
+const Model = require('../../models/private/incidents').model;
 let users = [];
 
-module.exports = class Emergencies {
+module.exports = class Incidents {
 
   static send(req, res, next) {
     users.push(req.body);
@@ -44,11 +45,13 @@ module.exports = class Emergencies {
     });
   }
 
-  static read(req, res, next) {
-    helpers.handleResponse(res, null, users);
+  static list(req, res, next) {
+    Model.find().lean().exec((err, docs) => {
+      helpers.handleResponse(res, err, docs);
+    });
   }
 
-  static readById(req, res, next) {
+  static read(req, res, next) {
     helpers.handleResponse(res, null, users);
   }
 
