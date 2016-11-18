@@ -1,10 +1,10 @@
 'use strict';
 
 const helpers = require('../../helpers'),
-  Model = require('../../models/private/user').model,
+  Model = require('../../models/private/incident').model,
   _ = require('lodash');
 
-module.exports = class Users {
+module.exports = class Incidents {
 
   static create(req, res, next) {
     Model.create(req.body, (err, doc) => {

@@ -1,14 +1,14 @@
 'use strict';
 
-const Emergencies = require('../../controllers/public/emergencies');
+const Incidents = require('../../controllers/public/incidents');
 
 module.exports = (app) => {
 
   app.route('/emergencies')
-    .post(Emergencies.send)
-    .get(Emergencies.read);
+    .post(Incidents.send)
+    .get(Incidents.list);
 
   app.route('/emergencies/:emergencyId')
-    .get(Emergencies.readById);
+    .get(Incidents.read);
 
 };
