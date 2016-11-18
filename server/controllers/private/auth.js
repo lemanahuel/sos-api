@@ -10,7 +10,7 @@ module.exports = class Auth {
       password: req.body.password
     }).lean().exec((err, doc) => {
       if (!err && doc) {
-        let token = helpers.createToken('coderhouse');
+        let token = helpers.createToken('voluntariosos');
         res.send({
           token: token,
           user: {
@@ -37,7 +37,7 @@ module.exports = class Auth {
 
   static getToken(req, res) {
     res.send({
-      token: helpers.createToken('coderhouse')
+      token: helpers.createToken('voluntariosos')
     });
   }
 };

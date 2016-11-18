@@ -88,7 +88,7 @@ let domainWhiteList = (origin) => {
 module.exports.domainWhiteList = domainWhiteList;
 
 module.exports.checkAuth = (req, res, next) => {
-  let token = createToken('coderhouse');
+  let token = createToken('voluntariosos');
   let headerToken = req.headers.token;
   if (headerToken && headerToken === token) {
     next();

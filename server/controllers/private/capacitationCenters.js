@@ -9,7 +9,7 @@ const ccs = [{
   user: {},
   name: 'Centro de capacitacion 2',
   description: 'Damos capacitaciones 2',
-  url: 'https://www.coderhouse.com',
+  url: 'https://www.voluntariosos.org',
   avatar: 'avatar.jpg',
   contact: {
     email: 'center@gmail.com',
@@ -29,7 +29,7 @@ const ccs = [{
   courses: [{
     name: 'Curso de RPC 2',
     description: 'Descripcion del curso 2',
-    url: 'https://www.coderhouse.com',
+    url: 'https://www.voluntariosos.org',
     published: false
   }],
   enable: false,
