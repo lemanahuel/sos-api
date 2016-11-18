@@ -11,8 +11,7 @@ let respondIncidentByNotification = (incident) => {
   fcm.send({
     to: incident.token,
     data: {
-      title: incident.title,
-      body: incident.body
+      location: incident.location
     },
     notification: {
       title: 'Voluntario confirmado',
@@ -35,12 +34,11 @@ let sendNotifications = () => {
       fcm.send({
         to: incident.token,
         data: {
-          title: incident.title,
-          body: incident.body
+          location: incident.location
         },
         notification: {
-          title: incident.body,
-          body: incident.name
+          title: incident.title,
+          body: incident.body
         }
       }).then((res) => {
         console.log("Successfully sent with response: ", res);
@@ -67,11 +65,13 @@ module.exports = class Incidents {
 
     console.log(incident);
 
+    if (_.isString(incident.location)) {
+      incident.location = JSON.parse(incident.location);
+    }
+
     Model.create({
       location: incident.location,
       token: incident.token,
-      title: incident.title,
-      body: incident.body
     }, (err, doc) => {
       sendNotifications();
 
