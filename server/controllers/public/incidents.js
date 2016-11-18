@@ -65,6 +65,8 @@ module.exports = class Incidents {
     //   your_custom_data_key: 'your_custom_data_value'
     // },
 
+    console.log(incident);
+
     Model.create({
       location: incident.location,
       token: incident.token,
