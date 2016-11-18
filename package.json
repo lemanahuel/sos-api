@@ -37,6 +37,7 @@
     "express-session": "^1.14.1",
     "fast-levenshtein": "^2.0.5",
     "fcm-push": "^1.1.0",
+    "geocoder": "^0.2.2",
     "grunt": "~1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-concurrent": "2.3.1",
