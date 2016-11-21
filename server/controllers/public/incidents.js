@@ -68,16 +68,16 @@ module.exports = class Incidents {
 
     incident.location = {
       lte: incident.latitude,
-      lng: incident.longitude,
+      lng: incident.longitude
     };
 
     geocoder.reverseGeocode(incident.location.lte, incident.location.lng, (err, res) => {
-      console.log(res && res.data);
+      console.log(res);
     });
 
     request.get('https://ws.usig.buenosaires.gob.ar/datos_utiles?lat=' + incident.location.lte + '&lon=' + incident.location.lng, (err, res, body) => {
       incident.location.comuna = res && res.data ? res.data.comuna : '';
-      console.log(res && res.data);
+      console.log(res);
     });
 
     Model.create({
