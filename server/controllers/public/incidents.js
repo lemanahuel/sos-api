@@ -78,7 +78,7 @@ module.exports = class Incidents {
     };
 
     geocoder.reverseGeocode(incident.location.lte, incident.location.lng, (err, res) => {
-      console.log('geocoder', res.toString());
+      console.log('geocoder', res && res.toString());
     });
 
     request.get('https://ws.usig.buenosaires.gob.ar/datos_utiles?lat=' + incident.location.lte + '&lon=' + incident.location.lng, (err, res, body) => {
