@@ -93,8 +93,14 @@ module.exports = class Incidents {
   }
 
   static list(req, res, next) {
+    let d = new Date();
+    d.setMinutes(d.getMinutes() - 5);
+
     Model.find({
-      enable: true
+      enable: true,
+      created_at: {
+        $gte: d
+      }
     }).lean().exec((err, docs) => {
       helpers.handleResponse(res, err, docs);
     });
