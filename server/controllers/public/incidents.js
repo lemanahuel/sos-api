@@ -27,8 +27,14 @@ let respondIncidentByNotification = (incident) => {
 };
 
 let sendNotifications = () => {
+  let d = new Date();
+  d.setMinutes(d.getMinutes() - 5);
+
   Model.find({
-    enable: true
+    enable: true,
+    created_at: {
+      $gte: d
+    }
   }).lean().exec((err, docs) => {
     console.log('incidents', docs.length);
 
@@ -72,12 +78,12 @@ module.exports = class Incidents {
     };
 
     geocoder.reverseGeocode(incident.location.lte, incident.location.lng, (err, res) => {
-      console.log(res);
+      console.log('geocoder', res.toString());
     });
 
     request.get('https://ws.usig.buenosaires.gob.ar/datos_utiles?lat=' + incident.location.lte + '&lon=' + incident.location.lng, (err, res, body) => {
       incident.location.comuna = res && res.data ? res.data.comuna : '';
-      console.log(res);
+      console.log('buenosaires', res.toString());
     });
 
     Model.create({
