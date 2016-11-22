@@ -77,6 +77,8 @@ module.exports = class Incidents {
       lng: incident.longitude
     };
 
+    console.log(incident.location.lte, incident.location.lng);
+
     geocoder.reverseGeocode(incident.location.lte, incident.location.lng, (err, res) => {
       console.log('geocoder', err, res);
     });
