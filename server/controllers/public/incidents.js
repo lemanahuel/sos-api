@@ -32,7 +32,7 @@ let sendNotifications = () => {
 
   Model.find({
     enable: true,
-    created_at: {
+    createdAt: {
       $gte: d
     }
   }).lean().exec((err, docs) => {
@@ -160,7 +160,7 @@ module.exports = class Incidents {
 
     Model.find({
       enable: true,
-      created_at: {
+      createdAt: {
         $gte: d
       }
     }).lean().exec((err, docs) => {
