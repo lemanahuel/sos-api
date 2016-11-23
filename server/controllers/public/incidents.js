@@ -80,7 +80,7 @@ module.exports = class Incidents {
     console.log(incident, incident.location, incident.location.lte, incident.location.lng);
 
     geocoder.reverseGeocode(incident.location.lte, incident.location.lng, (err, geoRes) => {
-      console.log('geocoder', err, geoRes[0]);
+      console.log('geocoder', err, geoRes);
 
       if (!err) {
         Model.create({
