@@ -26,6 +26,44 @@ let respondIncidentByNotification = (incident) => {
   });
 };
 
+let sendNotification = (incident) => {
+  let d = new Date();
+  d.setMinutes(d.getMinutes() - 5);
+
+  Model.find({
+    enable: true
+  }).lean().exec((err, docs) => {
+    console.log('incidents', docs.length);
+
+    async.each(docs, (doc, cb) => {
+      console.log(incident.title, incident.body);
+      if (doc && doc.token !== incident.token) {
+        fcm.send({
+          to: doc.token,
+          data: {
+            location: incident.location
+          },
+          notification: {
+            title: incident.title,
+            body: incident.body
+          }
+        }).then((res) => {
+          console.log("Successfully sent with response: ", res);
+          cb(null);
+        }).catch((err) => {
+          console.log("Something has gone wrong!", err);
+          cb(null);
+        });
+      } else {
+        console.log("Owner error", err);
+        cb(null);
+      }
+    }, (err) => {
+      console.log('FINISH-incidents', docs.length);
+    });
+  });
+};
+
 let sendNotifications = () => {
   let d = new Date();
   d.setMinutes(d.getMinutes() - 5);
@@ -143,7 +181,8 @@ module.exports = class Incidents {
           title: 'Nueva Emergencia',
           body: geo.formatted_address
         }, (err, doc) => {
-          sendNotifications();
+          //sendNotifications();
+          sendNotification(doc);
 
           helpers.handleResponse(res, err, {
             msg: 'incident-sent'
