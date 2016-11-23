@@ -77,26 +77,28 @@ module.exports = class Incidents {
       lng: incident.longitude
     };
 
-    console.log(incident.location.lte, incident.location.lng);
+    console.log(incident, incident.location, incident.location.lte, incident.location.lng);
 
     geocoder.reverseGeocode(incident.location.lte, incident.location.lng, (err, res) => {
       console.log('geocoder', err, res);
-    });
 
-    request.get('https://ws.usig.buenosaires.gob.ar/datos_utiles?lat=' + incident.location.lte + '&lon=' + incident.location.lng, (err, res, body) => {
-      incident.location.comuna = res && res.data ? res.data.comuna : '';
-      console.log('buenosaires', err, res);
-    });
+      if (!err) {
+        Model.create({
+          location: incident.location,
+          token: incident.token,
+          address: res[0]
+        }, (err, doc) => {
+          sendNotifications();
 
-    Model.create({
-      location: incident.location,
-      token: incident.token,
-    }, (err, doc) => {
-      sendNotifications();
-
-      helpers.handleResponse(res, err, {
-        msg: 'incident-sent'
-      }, next);
+          helpers.handleResponse(res, err, {
+            msg: 'incident-sent'
+          }, next);
+        });
+      } else {
+        helpers.handleResponse(res, err, {
+          msg: 'incident-error'
+        }, next);
+      }
     });
   }
 
