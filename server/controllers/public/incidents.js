@@ -125,7 +125,7 @@ module.exports = class Incidents {
       let comuna = '';
 
       if (geo && geo.address_components) {
-        comuna = _.find(geo.address_componentes, (item) => {
+        comuna = _.find(geo.address_components, (item) => {
           console.log(item.types);
           return item.types === '';
         });
