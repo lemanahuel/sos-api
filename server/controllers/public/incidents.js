@@ -39,6 +39,7 @@ let sendNotifications = () => {
     console.log('incidents', docs.length);
 
     async.each(docs, (incident, cb) => {
+      console.log(incident.title, incident.body);
       fcm.send({
         to: incident.token,
         data: {
@@ -136,9 +137,11 @@ module.exports = class Incidents {
 
       if (!err) {
         Model.create({
-          location: geoRes && geoRes.results[0],
+          location: geo,
           token: incident.token,
-          comuna: comuna
+          comuna: comuna,
+          title: 'Nueva Emergencia',
+          body: geo.formatted_address
         }, (err, doc) => {
           sendNotifications();
 
