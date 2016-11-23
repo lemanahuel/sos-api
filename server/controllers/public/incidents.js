@@ -127,7 +127,7 @@ module.exports = class Incidents {
       if (geo && geo.address_components) {
         comuna = _.find(geo.address_components, (item) => {
           console.log(item.long_name, item.types);
-          return item.types.indexOf('administrative_area_level_2') === -1;
+          return item.types.indexOf('administrative_area_level_2') !== -1;
         });
         if (comuna && comuna.short_name) {
           comuna = comuna.short_name;
