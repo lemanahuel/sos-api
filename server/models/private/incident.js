@@ -9,6 +9,10 @@ module.exports.schema = schema = new mongoose.Schema({
   location: {
     type: mongoose.Schema.Types.Mixed
   },
+  comuna: {
+    type: String,
+    trim: true
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

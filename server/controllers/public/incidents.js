@@ -79,13 +79,63 @@ module.exports = class Incidents {
 
     console.log(incident, incident.location, incident.location.lte, incident.location.lng);
 
+    // {
+    //   address_components: [{ long_name: '1894', short_name: '1894', types: [Object] },
+    //     { long_name: 'Lavalle', short_name: 'Lavalle', types: [Object] },
+    //     {
+    //       long_name: 'Balvanera',
+    //       short_name: 'Balvanera',
+    //       types: [Object]
+    //     },
+    //     {
+    //       long_name: 'Buenos Aires',
+    //       short_name: 'CABA',
+    //       types: [Object]
+    //     },
+    //     {
+    //       long_name: 'Comuna 3',
+    //       short_name: 'Comuna 3',
+    //       types: [Object]
+    //     },
+    //     {
+    //       long_name: 'Ciudad Autónoma de Buenos Aires',
+    //       short_name: 'CABA',
+    //       types: [Object]
+    //     },
+    //     { long_name: 'Argentina', short_name: 'AR', types: [Object] },
+    //     {
+    //       long_name: 'C1051ABB',
+    //       short_name: 'C1051ABB',
+    //       types: [Object]
+    //     }
+    //   ],
+    //   formatted_address: 'Lavalle 1894, C1051ABB CABA, Argentina',
+    //   geometry: {
+    //     location: { lat: -34.603283, lng: -58.39368700000001 },
+    //     location_type: 'ROOFTOP',
+    //     viewport: { northeast: [Object], southwest: [Object] }
+    //   },
+    //   place_id: 'ChIJi1VfMsDKvJURuT9CNfiZOrQ',
+    //   types: ['street_address']
+    // }
+
     geocoder.reverseGeocode(incident.location.lte, incident.location.lng, (err, geoRes) => {
       console.log('geocoder', err, geoRes && geoRes.results[0]);
+      let geo = geoRes && geoRes.results[0];
+      let comuna = '';
+
+      if (geo && geo.address_components) {
+        comunga = _.find(geo.address_componentes, (item) => {
+          console.log(item.types);
+          return item.types === '';
+        });
+      }
 
       if (!err) {
         Model.create({
           location: geoRes && geoRes.results[0],
-          token: incident.token
+          token: incident.token,
+          comuna: comuna
         }, (err, doc) => {
           sendNotifications();
 
