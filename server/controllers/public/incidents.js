@@ -246,4 +246,32 @@ module.exports = class Incidents {
     });
   }
 
+  static getComuna() {
+    let incident = req.body;
+
+    geocoder.reverseGeocode(incident.latitude, incident.longitude, (err, geoRes) => {
+      let geo = geoRes && geoRes.results[0];
+      let comuna = '';
+
+      if (geo && geo.address_components) {
+        comuna = _.find(geo.address_components, (item) => {
+          console.log(item.long_name, item.types);
+          return item.types.indexOf('administrative_area_level_2') !== -1;
+        });
+        if (comuna && comuna.short_name) {
+          comuna = comuna.short_name;
+        }
+      }
+
+      if (!err) {
+        helpers.handleResponse(res, err, {
+          comuna: comuna
+        }, next);
+      } else {
+        helpers.handleResponse(res, err, {
+          msg: 'cant-get-comuna'
+        }, next);
+      }
+    });
+  }
 };

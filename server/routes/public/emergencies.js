@@ -11,4 +11,7 @@ module.exports = (app) => {
   app.route('/emergencies/:emergencyId')
     .get(Incidents.read);
 
+  app.route('/comuna-by-coords')
+    .get(Incidents.getComuna);
+
 };
