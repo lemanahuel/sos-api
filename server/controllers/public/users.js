@@ -7,24 +7,30 @@ const helpers = require('../../helpers'),
 module.exports = class Users {
 
   static create(req, res, next) {
-    Model.create(req.body, (err, doc) => {
+    console.log(req.body);
+    Model.findOneAndUpdate({
+      email: req.body && req.body.email
+    }, req.body, {
+      upsert: true,
+      safe: true
+    }).lean().exec(err, doc) => {
       helpers.handleResponse(res, err, doc, next);
     });
-  }
+}
 
-  static read(req, res, next) {
-    Model.findById(req.params.userId).lean().exec((err, doc) => {
-      helpers.handleResponse(res, err, doc);
-    });
-  }
+static read(req, res, next) {
+  Model.findById(req.params.userId).lean().exec((err, doc) => {
+    helpers.handleResponse(res, err, doc);
+  });
+}
 
-  static update(req, res, next) {
-    delete req.body._id;
+static update(req, res, next) {
+  delete req.body._id;
 
-    Model.findByIdAndUpdate(req.params.userId, req.body, {
-      new: true
-    }).lean().exec((err, doc) => {
-      helpers.handleResponse(res, err, doc, next);
-    });
-  }
+  Model.findByIdAndUpdate(req.params.userId, req.body, {
+    new: true
+  }).lean().exec((err, doc) => {
+    helpers.handleResponse(res, err, doc, next);
+  });
+}
 };
