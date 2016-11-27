@@ -9,6 +9,6 @@ module.exports = (app) => {
 
   app.route('/users/:userId')
     .get(Users.read)
-    .put(Users.update);
+    .post(Users.update);
 
 };

@@ -42,9 +42,13 @@ module.exports.schema = schema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  rol: {
-    type: Number,
-    default: 10
+  isVolunteer: {
+    type: Boolean,
+    default: false
+  },
+  comuna: {
+    type: String,
+    trim: true
   },
   cartifications: [{
     title: {

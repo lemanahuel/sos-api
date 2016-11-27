@@ -7,12 +7,13 @@ const helpers = require('../../helpers'),
 module.exports = class Users {
 
   static create(req, res, next) {
-    console.log(req.body);
+    console.log('Users', req.body);
     Model.findOneAndUpdate({
       email: req.body && req.body.email
     }, req.body, {
       upsert: true,
-      safe: true
+      safe: true,
+      new: true
     }).lean().exec((err, doc) => {
       helpers.handleResponse(res, err, doc, next);
     });
@@ -26,6 +27,7 @@ module.exports = class Users {
 
   static update(req, res, next) {
     delete req.body._id;
+    console.log(req.params.userId, req.body);
 
     Model.findByIdAndUpdate(req.params.userId, req.body, {
       new: true
