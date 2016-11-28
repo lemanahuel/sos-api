@@ -16,13 +16,13 @@ module.exports = (app) => {
     require('./private/auth')(app);
     require('./private/users')(app);
     require('./private/capacitationCenters')(app);
-    require('./private/users')(app);
+    require('./private/incidents')(app);
   };
 
   let loadPublic = () => {
     require('./public/users')(app);
     require('./public/capacitationCenters')(app);
-    require('./public/emergencies')(app);
+    require('./public/incidents')(app);
   };
 
   loadPrivate();

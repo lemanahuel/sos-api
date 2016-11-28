@@ -4,12 +4,15 @@ const Incidents = require('../../controllers/public/incidents');
 
 module.exports = (app) => {
 
-  app.route('/emergencies')
+  app.route('/incidents')
     .post(Incidents.send)
     .get(Incidents.list);
 
-  app.route('/emergencies/:emergencyId')
+  app.route('/incidents/:incidentId')
     .get(Incidents.read);
+
+  app.route('/incidents/:incidentId/respond')
+    .post(Incidents.respond);
 
   app.route('/comuna-by-coords')
     .get(Incidents.getComuna);

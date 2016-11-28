@@ -223,13 +223,16 @@ module.exports = class Incidents {
         responses: response
       }
     };
+    console.log(response);
 
     Model.findById(req.params.incidentId).lean().exec((err, doc) => {
-      let amountOfAffirmatives = _.filter(doc.responses, {
-        affirmative: true
-      });
-      if (amountOfAffirmatives.length >= 3) {
-        params.enable = false;
+      if (!err && doc) {
+        let amountOfAffirmatives = _.filter(doc.responses, {
+          affirmative: true
+        });
+        if (amountOfAffirmatives.length >= 3) {
+          params.enable = false;
+        }
       }
       Model.findByIdAndUpdate(req.params.incidentId, params, {
         new: true

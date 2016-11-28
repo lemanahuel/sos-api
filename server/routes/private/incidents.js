@@ -14,7 +14,4 @@ module.exports = (app) => {
     .put(helpers.checkAuth, Incidents.update)
     .delete(helpers.checkAuth, Incidents.delete);
 
-  app.route('/private/incidents/:incidentId/respond')
-    .put(helpers.checkAuth, Incidents.respond);
-
 };

@@ -36,7 +36,7 @@ module.exports.schema = schema = new mongoose.Schema({
     },
     affirmative: {
       type: Boolean,
-      default: false
+      default: true
     }
   }],
   enable: {
