@@ -28,6 +28,12 @@ module.exports.basePath = () => {
   return path;
 };
 
+module.exports.normalizeComuna = (comuna) => {
+  comuna = comuna && comuna.toLowerCase();
+  comuna = comuna && _.replace(comuna, ' ', '-');
+  return comuna;
+};
+
 // Handle every response back to the client
 let handleResponse;
 module.exports.handleResponse = handleResponse = (res, err, doc, next) => {

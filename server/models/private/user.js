@@ -84,6 +84,10 @@ module.exports.schema = schema = new mongoose.Schema({
       type: Boolean,
       default: false
     }
+  },
+  enable: {
+    type: Boolean,
+    default: true
   }
 });
 

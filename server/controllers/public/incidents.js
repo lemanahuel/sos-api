@@ -8,6 +8,7 @@ const helpers = require('../../helpers'),
 const FCM = require('fcm-push');
 const fcm = new FCM('AIzaSyDi7v71mSCz5sVjXew3bYUrCbfhsadVcL4');
 const Model = require('../../models/private/incident').model;
+const UserModel = require('../../models/private/user').model;
 
 let respondIncidentByNotification = (incident) => {
   fcm.send({
@@ -30,7 +31,9 @@ let sendNotification = (incident) => {
   let d = new Date();
   d.setMinutes(d.getMinutes() - 5);
 
-  Model.find({
+  UserModel.find({
+    comuna: helpers.normalizeComuna(incident.comuna),
+    isVolunteer: true,
     enable: true
   }).lean().exec((err, docs) => {
     console.log('incidents', docs.length);
@@ -68,7 +71,7 @@ let sendNotifications = () => {
   let d = new Date();
   d.setMinutes(d.getMinutes() - 5);
 
-  Model.find({
+  UserModel.find({
     enable: true,
     createdAt: {
       $gte: d
@@ -175,9 +178,10 @@ module.exports = class Incidents {
 
       if (!err) {
         Model.create({
+          user: incident.user,
           location: geo,
           token: incident.token,
-          comuna: comuna,
+          comuna: helpers.normalizeComuna(comuna),
           title: 'Nueva Emergencia',
           body: geo.formatted_address
         }, (err, doc) => {
@@ -267,7 +271,7 @@ module.exports = class Incidents {
 
       if (!err) {
         helpers.handleResponse(res, err, {
-          comuna: comuna
+          comuna: helpers.normalizeComuna(comuna)
         }, next);
       } else {
         helpers.handleResponse(res, err, {
