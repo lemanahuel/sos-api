@@ -11,6 +11,10 @@ module.exports.schema = schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  capacitationCenter: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'capacitationCenter'
+  },
   incident: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

@@ -50,7 +50,7 @@ module.exports.schema = schema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  cartifications: [{
+  certifications: [{
     title: {
       type: String,
       trim: true
