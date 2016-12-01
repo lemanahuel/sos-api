@@ -71,7 +71,7 @@ let sendNotifications = () => {
   let d = new Date();
   d.setMinutes(d.getMinutes() - 5);
 
-  UserModel.find({
+  Model.find({
     enable: true,
     createdAt: {
       $gte: d
@@ -177,6 +177,14 @@ module.exports = class Incidents {
       }
 
       if (!err) {
+        console.log('incident', {
+          user: incident.user,
+          location: geo,
+          token: incident.token,
+          comuna: helpers.normalizeComuna(comuna),
+          title: 'Nueva Emergencia',
+          body: geo.formatted_address
+        });
         Model.create({
           user: incident.user,
           location: geo,
