@@ -215,7 +215,7 @@ module.exports = class Incidents {
       createdAt: {
         $gte: d
       }
-    }).lean().exec((err, docs) => {
+    }).sort('createdAt').lean().exec((err, docs) => {
       helpers.handleResponse(res, err, docs);
     });
   }
