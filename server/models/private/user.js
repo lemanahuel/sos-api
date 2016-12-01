@@ -50,6 +50,10 @@ module.exports.schema = schema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  token: {
+    type: String,
+    trim: true
+  },
   certifications: [{
     title: {
       type: String,
