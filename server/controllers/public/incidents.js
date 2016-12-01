@@ -175,15 +175,15 @@ module.exports = class Incidents {
         }
       }
 
+
+      console.log('incident', {
+        token: incident.token,
+        comuna: helpers.normalizeComuna(comuna),
+        title: 'Nueva Emergencia',
+        body: geo.formatted_address
+      });
+
       if (!err) {
-        console.log('incident', {
-          user: incident.user,
-          location: geo,
-          token: incident.token,
-          comuna: helpers.normalizeComuna(comuna),
-          title: 'Nueva Emergencia',
-          body: geo.formatted_address
-        });
         Model.create({
           user: incident.user,
           location: geo,
