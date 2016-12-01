@@ -28,18 +28,17 @@ let respondIncidentByNotification = (incident) => {
 };
 
 let sendNotification = (incident) => {
-  let d = new Date();
-  d.setMinutes(d.getMinutes() - 5);
+  console.log('UserModel Comuna', helpers.normalizeComuna(incident.comuna));
 
   UserModel.find({
     comuna: helpers.normalizeComuna(incident.comuna),
     isVolunteer: true,
     enable: true
   }).lean().exec((err, docs) => {
-    console.log('incidents', docs.length);
+    console.log('UserModel', docs.length);
 
     async.each(docs, (doc, cb) => {
-      console.log(incident.title, incident.body);
+      console.log(doc.email, incident.token);
       if (doc && doc.token !== incident.token) {
         fcm.send({
           to: doc.token,
