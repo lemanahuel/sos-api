@@ -32,8 +32,7 @@ let sendNotification = (incident) => {
 
   UserModel.find({
     comuna: helpers.normalizeComuna(incident.comuna),
-    isVolunteer: true,
-    enable: true
+    isVolunteer: true
   }).lean().exec((err, docs) => {
     console.log('UserModel', docs.length);
 
