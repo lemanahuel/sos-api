@@ -13,7 +13,7 @@ module.exports = class Incidents {
   }
 
   static list(req, res, next) {
-    Model.find().lean().exec((err, docs) => {
+    Model.find().lean().sort('-createdAt').exec((err, docs) => {
       helpers.handleResponse(res, err, docs);
     });
   }

@@ -25,6 +25,10 @@ module.exports = class Users {
       findParams.rol = q.rol;
     }
 
+    if (q.isVolunteer) {
+      findParams.isVolunteer = q.isVolunteer;
+    }
+
     Model.find(findParams, null, options)
       .lean().exec((err, docs) => {
         helpers.handleResponse(res, err, docs);
