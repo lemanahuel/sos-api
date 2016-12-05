@@ -242,16 +242,21 @@ module.exports = class Incidents {
         let amountOfAffirmatives = _.filter(doc.responses, {
           affirmative: true
         });
-        if (amountOfAffirmatives.length >= 3) {
+        let startTime = new Date(doc.createAt).getTime();
+        let endTime = new Date().getTime();
+        let difference = endTime.getTime() - startTime.getTime();
+        let resultInMinutes = Math.round(difference / 60000);
+        if (amountOfAffirmatives.length >= 3 || resultInMinutes <= 5) {
           params.enable = false;
         }
       }
+
       Model.findByIdAndUpdate(req.params.incidentId, params, {
         new: true
       }).lean().exec((err, doc) => {
         if (!doc.enable) {
           helpers.handleResponse(res, err, {
-            msg: 'Ya respondieron afirmativamente varios voluntarios!'
+            msg: 'Ya respondieron otros varios voluntarios!'
           }, next);
         } else {
           respondIncidentByNotification(doc);
