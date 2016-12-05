@@ -33,6 +33,11 @@ module.exports.normalizeComuna = (comuna) => {
   comuna = comuna && _.replace(comuna, ' ', '-');
   return comuna;
 };
+module.exports.desnormalizeComuna = (comuna) => {
+  comuna = comuna && comuna.toLowerCase();
+  comuna = comuna && _.replace(comuna, '-', ' ');
+  return comuna;
+};
 
 // Handle every response back to the client
 let handleResponse;

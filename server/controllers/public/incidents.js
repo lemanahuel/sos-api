@@ -175,10 +175,11 @@ module.exports = class Incidents {
         }
       }
 
+      comuna = helpers.normalizeComuna(comuna);
 
       console.log('incident', {
         token: incident.token,
-        comuna: helpers.normalizeComuna(comuna),
+        comuna: comuna,
         title: 'Nueva Emergencia',
         body: geo.formatted_address
       });
@@ -188,8 +189,8 @@ module.exports = class Incidents {
           user: incident.user,
           location: geo,
           token: incident.token,
-          comuna: helpers.normalizeComuna(comuna),
-          title: 'Nueva Emergencia',
+          comuna: comuna,
+          title: 'Alerta de incidente. En la ' + helpers.desnormalizeComuna(comuna),
           body: geo.formatted_address
         }, (err, doc) => {
           //sendNotifications();
