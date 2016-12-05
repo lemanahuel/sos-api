@@ -19,6 +19,30 @@ module.exports = class Users {
     });
   }
 
+  static list(req, res, next) {
+    let findParams = {
+      enable: true
+    };
+
+    if (req.query.volunteers) {
+      findParams.isVolunteer = true;
+    } else {
+      findParams.isVolunteer = {
+        $or: [{
+          isVolunteer: {
+            $exists: false
+          }
+        }, {
+          isVolunteer: false
+        }]
+      };
+    }
+
+    Model.find(findParams).lean().exec((err, doc) => {
+      helpers.handleResponse(res, err, doc);
+    });
+  }
+
   static read(req, res, next) {
     Model.findById(req.params.userId).lean().exec((err, doc) => {
       helpers.handleResponse(res, err, doc);

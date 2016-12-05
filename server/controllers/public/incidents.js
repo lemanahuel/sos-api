@@ -211,13 +211,17 @@ module.exports = class Incidents {
   static list(req, res, next) {
     let d = new Date();
     d.setMinutes(d.getMinutes() - 5);
+    let findParams = {
+      enable: true
+    };
 
-    Model.find({
-      enable: true,
-      createdAt: {
+    if (!req.query.all) {
+      findParams.createdAt = {
         $gte: d
-      }
-    }).sort('createdAt').lean().exec((err, docs) => {
+      };
+    }
+
+    Model.find(findParams).sort('createdAt').lean().exec((err, docs) => {
       helpers.handleResponse(res, err, docs);
     });
   }
