@@ -14,7 +14,7 @@ module.exports = class Users {
 
   static list(req, res, next) {
     Model.find({
-      enable: true
+      enable: true,
       published: true
     }).lean().exec((err, docs) => {
       helpers.handleResponse(res, err, docs);
