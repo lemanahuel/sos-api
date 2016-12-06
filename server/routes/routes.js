@@ -23,6 +23,7 @@ module.exports = (app) => {
     require('./public/users')(app);
     require('./public/capacitationCenters')(app);
     require('./public/incidents')(app);
+    require('./public/testimonies')(app);
   };
 
   loadPrivate();

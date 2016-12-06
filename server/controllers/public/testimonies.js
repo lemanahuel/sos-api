@@ -1,7 +1,7 @@
 'use strict';
 
 const helpers = require('../../helpers'),
-  Model = require('../../models/private/user').model,
+  Model = require('../../models/private/testimony').model,
   _ = require('lodash');
 
 module.exports = class Users {
@@ -13,13 +13,16 @@ module.exports = class Users {
   }
 
   static list(req, res, next) {
-    Model.find().lean().exec((err, docs) => {
+    Model.find({
+      enable: true
+      published: true
+    }).lean().exec((err, docs) => {
       helpers.handleResponse(res, err, docs);
     });
   }
 
   static read(req, res, next) {
-    Model.findById(req.params.userId).lean().exec((err, doc) => {
+    Model.findById(req.params.testimonyId).lean().exec((err, doc) => {
       helpers.handleResponse(res, err, doc);
     });
   }

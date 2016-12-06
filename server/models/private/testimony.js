@@ -5,9 +5,17 @@ let schema;
 
 module.exports.schema = schema = new mongoose.Schema({
 
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+  name: {
+    type: String,
+    trim: true
+  },
+  lastname: {
+    type: String,
+    trim: true
+  },
+  email: {
+    type: String,
+    trim: true
   },
   text: {
     type: String,
