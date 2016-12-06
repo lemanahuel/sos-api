@@ -51,7 +51,10 @@ module.exports = class Users {
 
   static update(req, res, next) {
     delete req.body._id;
-    console.log(req.params.userId, req.body);
+
+    if (req.body.user) {
+      req.body = req.body.user;
+    }
 
     Model.findByIdAndUpdate(req.params.userId, req.body, {
       new: true
