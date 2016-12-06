@@ -56,7 +56,8 @@ module.exports = class Users {
     Model.findByIdAndUpdate(req.params.userId, req.body, {
       new: true
     }).lean().exec((err, doc) => {
-      helpers.handleResponse(res, err, doc, next);
+      req.params.userId = doc._id;
+      Users.read(req, res);
     });
   }
 };
