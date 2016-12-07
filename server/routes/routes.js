@@ -17,6 +17,7 @@ module.exports = (app) => {
     require('./private/users')(app);
     require('./private/capacitationCenters')(app);
     require('./private/incidents')(app);
+    require('./private/testimonies')(app);
   };
 
   let loadPublic = () => {
