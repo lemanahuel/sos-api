@@ -52,6 +52,7 @@ module.exports = class Users {
   static update(req, res, next) {
     if (req.body.user) {
       req.body = req.body.user;
+      delete req.body._id;
     }
 
     console.log(req.body);
