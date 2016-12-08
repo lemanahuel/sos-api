@@ -4,10 +4,10 @@ const Model = require('../../models/private/user').model;
 module.exports = class Auth {
 
   static authenticate(req, res) {
-    //TODO this should be a hash on an env variable
     Model.findOne({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      isAdmin: true
     }).lean().exec((err, doc) => {
       if (!err && doc) {
         let token = helpers.createToken('voluntariosos');

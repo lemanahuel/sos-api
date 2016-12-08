@@ -45,7 +45,9 @@ module.exports = class CC {
   }
 
   static list(req, res, next) {
-    Model.find().lean().exec((err, docs) => {
+    Model.find({
+      enable: true
+    }).lean().exec((err, docs) => {
       helpers.handleResponse(res, err, docs);
     });
   }

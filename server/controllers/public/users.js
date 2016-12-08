@@ -20,26 +20,14 @@ module.exports = class Users {
   }
 
   static list(req, res, next) {
-    let findParams = {
-      enable: true
-    };
+    let findParams = {};
 
     if (req.query.volunteers) {
       findParams.isVolunteer = true;
-    } else {
-      findParams.isVolunteer = {
-        $or: [{
-          isVolunteer: {
-            $exists: false
-          }
-        }, {
-          isVolunteer: false
-        }]
-      };
     }
 
-    Model.find(findParams).lean().exec((err, doc) => {
-      helpers.handleResponse(res, err, doc);
+    Model.find(findParams).select('avatar').lean().exec((err, docs) => {
+      helpers.handleResponse(res, err, docs);
     });
   }
 

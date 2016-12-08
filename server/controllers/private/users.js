@@ -21,12 +21,12 @@ module.exports = class Users {
       options.limit = parseInt(q.limit, 10);
     }
 
-    if (q.rol) {
-      findParams.rol = q.rol;
+    if (q.admin) {
+      findParams.isAdmin = true;
     }
 
     if (q.isVolunteer) {
-      findParams.isVolunteer = q.isVolunteer;
+      findParams.isVolunteer = true;
     }
 
     Model.find(findParams, null, options)
