@@ -42,6 +42,10 @@ module.exports.schema = schema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  wantToBeVolunteer: {
+    type: Boolean,
+    default: false
+  },
   isVolunteer: {
     type: Boolean,
     default: false
