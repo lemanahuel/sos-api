@@ -8,6 +8,11 @@ module.exports = class Users {
 
   static create(req, res, next) {
     console.log('Users', req.body);
+
+    if (req.body.comuna) {
+      req.body.comuna = helpers.normalizeComuna(req.body.comuna);
+    }
+
     Model.findOneAndUpdate({
       email: req.body && req.body.email
     }, req.body, {
@@ -41,6 +46,9 @@ module.exports = class Users {
     let body = req.body;
     if (req.body.user) {
       body = JSON.parse(req.body.user);
+      if (body.comuna) {
+        body.comuna = helpers.normalizeComuna(body.comuna);
+      }
     }
 
     Model.findByIdAndUpdate(req.params.userId, body, {
