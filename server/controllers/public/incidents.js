@@ -248,7 +248,7 @@ module.exports = class Incidents {
         });
         let startTime = new Date(doc.createAt).getTime();
         let endTime = new Date().getTime();
-        let difference = endTime.getTime() - startTime.getTime();
+        let difference = endTime - startTime;
         let resultInMinutes = Math.round(difference / 60000);
         if (amountOfAffirmatives.length >= 3 || resultInMinutes <= 5) {
           params.enable = false;
