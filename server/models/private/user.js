@@ -62,6 +62,10 @@ module.exports.schema = schema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  acceptedTerms: {
+    type: Boolean,
+    default: false
+  },
   certifications: [{
     title: {
       type: String,
