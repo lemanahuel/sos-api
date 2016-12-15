@@ -216,11 +216,11 @@ module.exports = class Incidents {
       enable: true
     };
 
-    // if (!req.query.all) {
-    //   findParams.createdAt = {
-    //     $gte: d
-    //   };
-    // }
+    if (!req.query.all) {
+      findParams.createdAt = {
+        $gte: d
+      };
+    }
 
     Model.find(findParams).sort('createdAt').lean().exec((err, docs) => {
       docs = _.map(docs, (item) => {
