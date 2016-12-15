@@ -17,8 +17,8 @@ let respondIncidentByNotification = (incident) => {
       location: incident.location
     },
     notification: {
-      title: 'Voluntario confirmado',
-      body: 'Voluntario en camino. Gracias'
+      title: 'Voluntario en camino.',
+      body: 'Gracias por alertar!'
     }
   }).then((res) => {
     console.log("Successfully sent with response: ", res);
