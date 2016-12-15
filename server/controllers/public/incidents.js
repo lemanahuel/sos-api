@@ -4,6 +4,7 @@ const helpers = require('../../helpers'),
   request = require('request'),
   async = require('async'),
   geocoder = require('geocoder'),
+  moment = require('moment'),
   _ = require('lodash');
 const FCM = require('fcm-push');
 const fcm = new FCM('AIzaSyDi7v71mSCz5sVjXew3bYUrCbfhsadVcL4');
@@ -215,13 +216,18 @@ module.exports = class Incidents {
       enable: true
     };
 
-    if (!req.query.all) {
-      findParams.createdAt = {
-        $gte: d
-      };
-    }
+    // if (!req.query.all) {
+    //   findParams.createdAt = {
+    //     $gte: d
+    //   };
+    // }
 
     Model.find(findParams).sort('createdAt').lean().exec((err, docs) => {
+      docs = _.map(docs, (item) => {
+        item.horario = moment(item.createdAt).format('HH:mm');
+        return item;
+      });
+
       helpers.handleResponse(res, err, docs);
     });
   }
