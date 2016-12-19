@@ -5,13 +5,17 @@ const helpers = require('../../helpers'),
 module.exports = class CC {
 
   static list(req, res, next) {
-    Model.find().lean().exec((err, docs) => {
+    Model.find({
+      enable: true
+    }).lean().exec((err, docs) => {
       helpers.handleResponse(res, err, docs);
     });
   }
 
   static read(req, res, next) {
+    console.log(req.params.ccId);
     Model.findById(req.params.ccId).lean().exec((err, doc) => {
+      console.log(doc);
       helpers.handleResponse(res, err, doc);
     });
   }
