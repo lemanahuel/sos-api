@@ -44,6 +44,12 @@ let sendNotification = (incident) => {
         fcm.send({
           to: doc.token,
           data: {
+            _id: incident._id,
+            title: '11',
+            body: '11',
+            token: '11',
+            horario: '11',
+            comuna: incident.comuna,
             location: incident.location
           },
           notification: {
@@ -301,6 +307,15 @@ module.exports = class Incidents {
           msg: 'cant-get-comuna'
         }, next);
       }
+    });
+  }
+
+  static _sendNotification(req, res) {
+    Model.find({
+      comuna: 'comuna-3'
+    }).sort('_id').lean().exec((err, docs) => {
+      sendNotification(_.last(docs));
+      helpers.handleResponse(res, err, _.last(docs));
     });
   }
 };

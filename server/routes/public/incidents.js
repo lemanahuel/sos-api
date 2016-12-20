@@ -17,4 +17,7 @@ module.exports = (app) => {
   app.route('/comuna-by-coords')
     .get(Incidents.getComuna);
 
+  app.route('/send/last-incident')
+    .get(Incidents._sendNotification);
+
 };
