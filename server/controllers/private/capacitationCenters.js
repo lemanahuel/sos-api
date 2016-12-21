@@ -68,7 +68,7 @@ module.exports = class CC {
   }
 
   static delete(req, res, next) {
-    Model.findByIdAndUpdate(req.params.userId, {
+    Model.findByIdAndUpdate(req.params.ccId, {
       $set: {
         enable: false
       }
