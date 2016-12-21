@@ -19,14 +19,14 @@ module.exports = class Incidents {
   }
 
   static read(req, res, next) {
-    Model.findById(req.params.userId).lean().exec((err, doc) => {
+    Model.findById(req.params.incidentId).lean().exec((err, doc) => {
       helpers.handleResponse(res, err, doc);
     });
   }
 
   static update(req, res, next) {
     delete req.body._id;
-    Model.findByIdAndUpdate(req.params.userId, req.body, {
+    Model.findByIdAndUpdate(req.params.incidentId, req.body, {
       new: true
     }).lean().exec((err, doc) => {
       helpers.handleResponse(res, err, doc, next);
@@ -34,7 +34,7 @@ module.exports = class Incidents {
   }
 
   static delete(req, res, next) {
-    Model.findByIdAndUpdate(req.params.userId, {
+    Model.findByIdAndUpdate(req.params.incidentId, {
       $set: {
         enable: false
       }
