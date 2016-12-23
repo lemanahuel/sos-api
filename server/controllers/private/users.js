@@ -41,6 +41,15 @@ module.exports = class Users {
     });
   }
 
+  static readByEmail(req, res, next) {
+    Model.find({
+      email: req.query.email,
+      isAdmin: true
+    }).lean().exec((err, doc) => {
+      helpers.handleResponse(res, err, doc);
+    });
+  }
+
   static update(req, res, next) {
     delete req.body._id;
     Model.findByIdAndUpdate(req.params.userId, req.body, {

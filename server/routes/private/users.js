@@ -14,4 +14,7 @@ module.exports = (app) => {
     .put(helpers.checkAuth, Users.update)
     .delete(helpers.checkAuth, Users.delete);
 
+  app.route('/private/user/readByEmail')
+    .get(helpers.checkAuth, Users.readByEmail);
+
 };
