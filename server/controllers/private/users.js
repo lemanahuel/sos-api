@@ -42,9 +42,8 @@ module.exports = class Users {
   }
 
   static readByEmail(req, res, next) {
-    Model.find({
-      email: req.query.email,
-      isAdmin: true
+    Model.findOne({
+      email: req.query.email
     }).lean().exec((err, doc) => {
       helpers.handleResponse(res, err, doc);
     });
