@@ -4,12 +4,14 @@ const helpers = require('../../helpers'),
   request = require('request'),
   async = require('async'),
   geocoder = require('geocoder'),
-  moment = require('moment'),
+  moment = require('moment-timezone'),
   _ = require('lodash');
 const FCM = require('fcm-push');
 const fcm = new FCM('AIzaSyDi7v71mSCz5sVjXew3bYUrCbfhsadVcL4');
 const Model = require('../../models/private/incident').model;
 const UserModel = require('../../models/private/user').model;
+const timeZone = 'America/Argentina/Buenos_Aires';
+
 
 let respondIncidentByNotification = (incident) => {
   fcm.send({
@@ -45,10 +47,10 @@ let sendNotification = (incident) => {
           to: doc.token,
           data: {
             _id: incident._id,
-            title: '11',
-            body: '11',
-            token: '11',
-            horario: '11',
+            title: '',
+            body: '',
+            token: '',
+            horario: '',
             comuna: incident.comuna,
             location: incident.location,
             type: 'incident'
@@ -231,7 +233,7 @@ module.exports = class Incidents {
 
     Model.find(findParams).sort('createdAt').lean().exec((err, docs) => {
       docs = _.map(docs, (item) => {
-        item.horario = moment(item.createdAt).format('HH:mm');
+        item.horario = moment(new Date(item.createdAt)).tz(timeZone).format('HH:mm');
         return item;
       });
 
