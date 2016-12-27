@@ -51,6 +51,10 @@ module.exports = class Users {
 
   static update(req, res, next) {
     delete req.body._id;
+    if (req.body) {
+      req.body.comuna = helpers.normalizeComuna(req.body.comuna);
+    }
+
     Model.findByIdAndUpdate(req.params.userId, req.body, {
       new: true
     }).lean().exec((err, doc) => {
