@@ -50,7 +50,8 @@ let sendNotification = (incident) => {
             token: '11',
             horario: '11',
             comuna: incident.comuna,
-            location: incident.location
+            location: incident.location,
+            type: 'incident'
           },
           notification: {
             title: incident.title,
