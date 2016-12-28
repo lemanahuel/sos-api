@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const User = require('./user');
+const User = require('./user').model;
 let schema;
 
 module.exports.schema = schema = new mongoose.Schema({

@@ -13,13 +13,19 @@ module.exports = class Incidents {
   }
 
   static list(req, res, next) {
-    Model.find().lean().sort('-createdAt').exec((err, docs) => {
+    Model.find().populate({
+      path: 'user',
+      model: 'User'
+    }).lean().sort('-createdAt').exec((err, docs) => {
       helpers.handleResponse(res, err, docs);
     });
   }
 
   static read(req, res, next) {
-    Model.findById(req.params.incidentId).lean().exec((err, doc) => {
+    Model.findById(req.params.incidentId).populate({
+      path: 'user',
+      model: 'User'
+    }).lean().exec((err, doc) => {
       helpers.handleResponse(res, err, doc);
     });
   }

@@ -195,6 +195,7 @@ module.exports = class Incidents {
       });
 
       if (!err) {
+        console.log(incident);
         Model.create({
           user: incident.user,
           location: geo,

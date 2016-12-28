@@ -107,4 +107,4 @@ module.exports.schema = schema = new mongoose.Schema({
   }
 });
 
-module.exports.model = mongoose.model('Users', schema, 'users');
+module.exports.model = mongoose.model('User', schema, 'users');
