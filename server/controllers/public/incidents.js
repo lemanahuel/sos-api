@@ -47,10 +47,10 @@ let sendNotification = (incident) => {
           to: doc.token,
           data: {
             _id: incident._id,
-            title: '',
-            body: '',
-            token: '',
-            horario: '',
+            title: '.',
+            body: '.',
+            token: '.',
+            horario: '.',
             comuna: incident.comuna,
             location: incident.location,
             type: 'incident'
