@@ -41,16 +41,15 @@ let sendNotification = (incident) => {
 
     async.each(docs, (doc, cb) => {
       console.log(doc.email, incident.token);
-      console.log(doc.token, incident.token);
       if (doc && doc.token !== incident.token) {
         fcm.send({
           to: doc.token,
           data: {
             _id: incident._id,
-            title: '.',
-            body: '.',
-            token: '.',
-            horario: '.',
+            title: incident.title,
+            body: incident.body,
+            token: incident.token,
+            horario: incident.horario,
             comuna: incident.comuna,
             location: incident.location,
             type: 'incident'
