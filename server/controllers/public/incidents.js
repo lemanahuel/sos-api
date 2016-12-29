@@ -30,7 +30,7 @@ let respondIncidentByNotification = (incident) => {
   });
 };
 
-let sendNotification = (incident) => {
+let sendNotification = (incident, self) => {
   console.log('UserModel Comuna', helpers.normalizeComuna(incident.comuna));
 
   UserModel.find({
@@ -41,7 +41,7 @@ let sendNotification = (incident) => {
 
     async.each(docs, (doc, cb) => {
       console.log(doc.email, incident.token);
-      if (doc && doc.token !== incident.token) {
+      if (doc && (self || doc.token !== incident.token)) {
         fcm.send({
           to: doc.token,
           data: {
@@ -315,17 +315,17 @@ module.exports = class Incidents {
 
   static _sendNotification(req, res) {
     Model.find({
-      comuna: 'comuna-3'
-    }).sort('_id').lean().exec((err, docs) => {
-      sendNotification(_.last(docs));
+      comuna: 'comuna-14'
+    }).sort('createdAt').lean().exec((err, docs) => {
+      sendNotification(_.last(docs), true);
       helpers.handleResponse(res, err, _.last(docs));
     });
   }
 
   static _respondNotification(req, res) {
     Model.find({
-      comuna: 'comuna-3'
-    }).sort('_id').lean().exec((err, docs) => {
+      comuna: 'comuna-14'
+    }).sort('createdAt').lean().exec((err, docs) => {
       respondIncidentByNotification(_.last(docs));
       helpers.handleResponse(res, err, _.last(docs));
     });
