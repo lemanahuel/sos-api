@@ -20,4 +20,7 @@ module.exports = (app) => {
   app.route('/send/last-incident')
     .get(Incidents._sendNotification);
 
+  app.route('/respond/last-incident')
+    .get(Incidents._respondNotification);
+
 };

@@ -321,4 +321,13 @@ module.exports = class Incidents {
       helpers.handleResponse(res, err, _.last(docs));
     });
   }
+
+  static _respondNotification(req, res) {
+    Model.find({
+      comuna: 'comuna-3'
+    }).sort('_id').lean().exec((err, docs) => {
+      respondIncidentByNotification(_.last(docs));
+      helpers.handleResponse(res, err, _.last(docs));
+    });
+  }
 };
